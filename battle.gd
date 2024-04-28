@@ -1,7 +1,7 @@
 extends Node
 
 @onready
-var hpLable = $Enemy/HPLable
+var enemy = $Enemy
 
 func _on_sword_button_pressed():
-	hpLable.text = '15HP'
+	enemy.hp -= 4
