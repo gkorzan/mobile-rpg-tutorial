@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cd0yaux7te2w0"]
+[gd_scene load_steps=5 format=3 uid="uid://cd0yaux7te2w0"]
 
 [ext_resource type="Script" path="res://battle.gd" id="1_lgd4f"]
 [ext_resource type="Texture2D" uid="uid://dg4vl5n5wy4s1" path="res://Images/Dungeon.png" id="1_s7r6l"]
 [ext_resource type="Texture2D" uid="uid://cney52inyl2fi" path="res://Images/Mobile RPG Mockup.png" id="1_topa1"]
-[ext_resource type="Texture2D" uid="uid://dcuhcgu1a3kyd" path="res://Images/Rat.png" id="3_ebohb"]
-[ext_resource type="Script" path="res://enemy.gd" id="4_wead2"]
+[ext_resource type="PackedScene" uid="uid://cof74u7vkdslc" path="res://enemy.tscn" id="4_ufn8p"]
 
 [node name="Battle" type="Node"]
 script = ExtResource("1_lgd4f")
@@ -14,25 +13,13 @@ position = Vector2(45, 80)
 texture = ExtResource("1_s7r6l")
 
 [node name="MobileRpgMockup" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.129412)
 position = Vector2(45, 80)
 texture = ExtResource("1_topa1")
 
-[node name="Enemy" type="Node2D" parent="."]
-position = Vector2(46, 32)
-script = ExtResource("4_wead2")
-metadata/_edit_group_ = true
-
-[node name="Rat" type="Sprite2D" parent="Enemy"]
-texture = ExtResource("3_ebohb")
-
-[node name="HPLable" type="Label" parent="Enemy"]
-offset_left = -9.0
-offset_top = -22.0
-offset_right = 9.0
-offset_bottom = -16.0
-text = "25hp"
-horizontal_alignment = 1
+[node name="Enemy" parent="." instance=ExtResource("4_ufn8p")]
+position = Vector2(45, 32)
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -64,4 +51,5 @@ offset_top = 137.0
 offset_right = 91.0
 offset_bottom = 161.0
 
+[connection signal="dead" from="Enemy" to="." method="_on_enemy_dead"]
 [connection signal="pressed" from="UI/SwordButton" to="." method="_on_sword_button_pressed"]

@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://cof74u7vkdslc"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_4chc1"]
+[ext_resource type="Texture2D" uid="uid://dcuhcgu1a3kyd" path="res://Images/Rat.png" id="2_r7706"]
+
+[sub_resource type="Animation" id="Animation_iihsp"]
+resource_name = "ATTACK"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rat:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -3), Vector2(0, 8), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_006g0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rat:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_e4iy3"]
+resource_name = "SHAKE"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rat:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-2, 3), Vector2(3, 2), Vector2(3, -2), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ifeqq"]
+_data = {
+"ATTACK": SubResource("Animation_iihsp"),
+"RESET": SubResource("Animation_006g0"),
+"SHAKE": SubResource("Animation_e4iy3")
+}
+
+[node name="Enemy" type="Node2D"]
+script = ExtResource("1_4chc1")
+
+[node name="Rat" type="Sprite2D" parent="."]
+texture = ExtResource("2_r7706")
+
+[node name="HPLable" type="Label" parent="."]
+offset_left = -9.0
+offset_top = -22.0
+offset_right = 9.0
+offset_bottom = -16.0
+text = "25hp"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ifeqq")
+}
