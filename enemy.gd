@@ -21,3 +21,8 @@ func set_hp(new_hp):
 		animationPlayer.play("SHAKE")
 		await animationPlayer.animation_finished
 		animationPlayer.play("ATTACK")
+		await animationPlayer.animation_finished
+		
+		var battle = get_tree().current_scene
+		var player = battle.find_child("PlayerStats")
+		player.hp -= 3

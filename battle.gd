@@ -3,7 +3,7 @@ extends Node
 @onready
 var enemy = $Enemy
 @onready
-var swordButton = $UI/SwordButton
+var actionButtons = $UI/ActionButtons
 
 func _on_sword_button_pressed():
 	if (enemy != null):
@@ -11,5 +11,5 @@ func _on_sword_button_pressed():
 
 
 func _on_enemy_dead():
-	swordButton.hide()
+	actionButtons.hide()
 	enemy = null
