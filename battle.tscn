@@ -128,7 +128,9 @@ custom_minimum_size = Vector2(32, 13)
 layout_mode = 2
 
 [connection signal="ap_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_player_stats_ap_changed"]
+[connection signal="end_turn" from="PlayerStats" to="." method="_on_player_stats_end_turn"]
 [connection signal="hp_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_player_stats_hp_changed"]
 [connection signal="mp_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_player_stats_mp_changed"]
 [connection signal="dead" from="Enemy" to="." method="_on_enemy_dead"]
+[connection signal="end_turn" from="Enemy" to="." method="_on_enemy_end_turn"]
 [connection signal="pressed" from="UI/ActionButtons/SwordButton" to="." method="_on_sword_button_pressed"]

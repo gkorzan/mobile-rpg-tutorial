@@ -2,27 +2,38 @@ extends Node2D
 
 var hp = 25:
 	set = set_hp
-
+var target = null
 @onready
 var hpLabel = $HPLable
 @onready
 var animationPlayer = $AnimationPlayer
 
 signal dead
+signal end_turn
 
 func set_hp(new_hp):
 	hp = new_hp
 	hpLabel.text = str(hp) + 'hp'
+
+func attack(target) -> void:
+	await get_tree().create_timer(0.4)
+	animationPlayer.play("ATTACK")
+	self.target = target
+	await animationPlayer.animation_finished
+	self.target = null
+	emit_signal("end_turn")
 	
-	if (hp <= 0):
+func deal_damage(amount):
+		target.hp -= 4
+	
+func take_damage(amount):
+	self.hp -= amount
+	if is_dead():
 		emit_signal("dead")
 		queue_free()
-	else:
+	else: 
 		animationPlayer.play("SHAKE")
 		await animationPlayer.animation_finished
-		animationPlayer.play("ATTACK")
-		await animationPlayer.animation_finished
-		
-		var battle = get_tree().current_scene
-		var player = battle.find_child("PlayerStats")
-		player.hp -= 3
+
+func is_dead():
+	return hp <= 0

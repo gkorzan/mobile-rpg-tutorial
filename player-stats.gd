@@ -13,13 +13,15 @@ signal mp_changed(value)
 signal end_turn
 
 func set_hp(value):
-	hp = min(MAX_HP, value)
+	hp = clamp(MAX_HP, 0, value)
 	emit_signal("hp_changed", hp)
 	
 func set_ap(value):
-	ap = min(MAX_AP, value)
+	ap = clamp(MAX_AP, 0, value)
 	emit_signal("ap_changed", ap)
+	if ap == 0:
+		emit_signal("end_turn")
 	
 func set_mp(value):
-	mp = min(MAX_MP, value)
+	mp = clamp(MAX_MP, 0, value)
 	emit_signal("mp_changed", mp)
