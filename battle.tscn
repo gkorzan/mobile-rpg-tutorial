@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cd0yaux7te2w0"]
+[gd_scene load_steps=8 format=3 uid="uid://cd0yaux7te2w0"]
 
 [ext_resource type="Script" path="res://battle.gd" id="1_lgd4f"]
 [ext_resource type="Texture2D" uid="uid://dg4vl5n5wy4s1" path="res://Images/Dungeon.png" id="1_s7r6l"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://player-stats.gd" id="2_tf8kt"]
 [ext_resource type="PackedScene" uid="uid://cof74u7vkdslc" path="res://enemy.tscn" id="4_ufn8p"]
 [ext_resource type="Script" path="res://stats-panel.gd" id="6_ut2h2"]
+[ext_resource type="PackedScene" uid="uid://c56ttwkhebwy" path="res://sword_button.tscn" id="7_nbjhs"]
 
 [node name="Battle" type="Node"]
 script = ExtResource("1_lgd4f")
@@ -94,37 +95,7 @@ theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 3
 columns = 2
 
-[node name="SwordButton" type="Button" parent="UI/ActionButtons"]
-custom_minimum_size = Vector2(32, 13)
-layout_mode = 2
-text = "SWORD"
-
-[node name="TestButotn" type="Button" parent="UI/ActionButtons"]
-custom_minimum_size = Vector2(32, 13)
-layout_mode = 2
-
-[node name="TestButotn2" type="Button" parent="UI/ActionButtons"]
-custom_minimum_size = Vector2(32, 13)
-layout_mode = 2
-
-[node name="TestButotn3" type="Button" parent="UI/ActionButtons"]
-custom_minimum_size = Vector2(32, 13)
-layout_mode = 2
-
-[node name="TestButotn4" type="Button" parent="UI/ActionButtons"]
-custom_minimum_size = Vector2(32, 13)
-layout_mode = 2
-
-[node name="TestButotn5" type="Button" parent="UI/ActionButtons"]
-custom_minimum_size = Vector2(32, 13)
-layout_mode = 2
-
-[node name="TestButotn6" type="Button" parent="UI/ActionButtons"]
-custom_minimum_size = Vector2(32, 13)
-layout_mode = 2
-
-[node name="TestButotn7" type="Button" parent="UI/ActionButtons"]
-custom_minimum_size = Vector2(32, 13)
+[node name="SwordButton" parent="UI/ActionButtons" instance=ExtResource("7_nbjhs")]
 layout_mode = 2
 
 [connection signal="ap_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_player_stats_ap_changed"]
@@ -133,4 +104,3 @@ layout_mode = 2
 [connection signal="mp_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_player_stats_mp_changed"]
 [connection signal="dead" from="Enemy" to="." method="_on_enemy_dead"]
 [connection signal="end_turn" from="Enemy" to="." method="_on_enemy_end_turn"]
-[connection signal="pressed" from="UI/ActionButtons/SwordButton" to="." method="_on_sword_button_pressed"]

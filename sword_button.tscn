@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c56ttwkhebwy"]
+
+[ext_resource type="PackedScene" uid="uid://eyhym04oyimm" path="res://action_button.tscn" id="1_6fudq"]
+[ext_resource type="Script" path="res://sword_button.gd" id="2_qk1kr"]
+
+[node name="SwordButton" instance=ExtResource("1_6fudq")]
+text = "SWORD"
+script = ExtResource("2_qk1kr")

@@ -16,11 +16,6 @@ func start_enemy_turn():
 	if enemy != null:
 		enemy.attack(playerStats)
 
-func _on_sword_button_pressed():
-	if (enemy != null):
-		enemy.take_damage(4)
-		playerStats.ap -= 1
-
 func _on_enemy_dead():
 	actionButtons.hide()
 	enemy = null
