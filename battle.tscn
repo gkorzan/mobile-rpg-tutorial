@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cd0yaux7te2w0"]
+[gd_scene load_steps=9 format=3 uid="uid://cd0yaux7te2w0"]
 
 [ext_resource type="Script" path="res://battle.gd" id="1_lgd4f"]
 [ext_resource type="Texture2D" uid="uid://dg4vl5n5wy4s1" path="res://Images/Dungeon.png" id="1_s7r6l"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cof74u7vkdslc" path="res://enemy.tscn" id="4_ufn8p"]
 [ext_resource type="Script" path="res://stats-panel.gd" id="6_ut2h2"]
 [ext_resource type="PackedScene" uid="uid://c56ttwkhebwy" path="res://sword_button.tscn" id="7_nbjhs"]
+[ext_resource type="PackedScene" uid="uid://dkjytnp8xjsde" path="res://heal_button.tscn" id="8_ahqgi"]
 
 [node name="Battle" type="Node"]
 script = ExtResource("1_lgd4f")
@@ -96,6 +97,9 @@ theme_override_constants/v_separation = 3
 columns = 2
 
 [node name="SwordButton" parent="UI/ActionButtons" instance=ExtResource("7_nbjhs")]
+layout_mode = 2
+
+[node name="HealButton" parent="UI/ActionButtons" instance=ExtResource("8_ahqgi")]
 layout_mode = 2
 
 [connection signal="ap_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_player_stats_ap_changed"]

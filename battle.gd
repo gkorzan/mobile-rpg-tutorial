@@ -20,7 +20,6 @@ func _on_enemy_dead():
 	actionButtons.hide()
 	enemy = null
 
-
 func _on_player_stats_end_turn():
 	start_enemy_turn()
 
