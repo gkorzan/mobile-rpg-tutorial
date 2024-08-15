@@ -1,7 +1,7 @@
 extends Node
 
-@onready var enemy = $Enemy
-@onready var playerStats = $PlayerStats
+const BattleUnits = preload("res://BattleUnits.tres")
+
 @onready var actionButtons = $UI/ActionButtons
 
 func _ready():
@@ -9,19 +9,20 @@ func _ready():
 	
 func start_player_turn():
 	actionButtons.show()
-	playerStats.ap = playerStats.MAX_AP
+	BattleUnits.PlayerStats.ap = BattleUnits.PlayerStats.MAX_AP
 	
 func start_enemy_turn():
 	actionButtons.hide()
-	if enemy != null:
-		enemy.attack(playerStats)
+	if BattleUnits.Enemy != null:
+		BattleUnits.Enemy.attack()
 
 func _on_enemy_dead():
 	actionButtons.hide()
-	enemy = null
+	BattleUnits.Enemy = null
 
 func _on_player_stats_end_turn():
 	start_enemy_turn()
 
 func _on_enemy_end_turn():
 	start_player_turn()
+

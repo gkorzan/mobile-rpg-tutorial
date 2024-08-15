@@ -1,5 +1,7 @@
 extends Node
 
+const BattleUnits = preload("res://BattleUnits.tres")
+
 const MAX_HP = 25
 var hp = MAX_HP: set = set_hp
 const MAX_AP = 3
@@ -25,3 +27,9 @@ func set_ap(value):
 func set_mp(value):
 	mp = clamp(MAX_MP, 0, value)
 	emit_signal("mp_changed", mp)
+	
+func _ready():
+	BattleUnits.PlayerStats = self
+	
+func _exit_tree():
+	BattleUnits.PlayerStats = null
