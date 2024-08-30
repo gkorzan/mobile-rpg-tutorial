@@ -2,8 +2,9 @@ extends Node2D
 
 const BattleUnits = preload("res://BattleUnits.tres")
 
-var hp = 25:
+@export var hp:int = 25:
 	set = set_hp
+@export var damage:int = 4
 @onready
 var hpLabel = $HPLable
 @onready
@@ -14,7 +15,8 @@ signal end_turn
 
 func set_hp(new_hp):
 	hp = new_hp
-	hpLabel.text = str(hp) + 'hp'
+	if hpLabel != null:
+		hpLabel.text = str(hp) + 'hp'
 
 func attack() -> void:
 	await get_tree().create_timer(0.4)
@@ -23,7 +25,7 @@ func attack() -> void:
 	emit_signal("end_turn")
 	
 func deal_damage(amount):
-		BattleUnits.PlayerStats.hp -= 4
+		BattleUnits.PlayerStats.hp -= damage
 	
 func take_damage(amount):
 	self.hp -= amount

@@ -1,16 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://cd0yaux7te2w0"]
+[gd_scene load_steps=10 format=3 uid="uid://cd0yaux7te2w0"]
 
 [ext_resource type="Script" path="res://battle.gd" id="1_lgd4f"]
 [ext_resource type="Texture2D" uid="uid://dg4vl5n5wy4s1" path="res://Images/Dungeon.png" id="1_s7r6l"]
 [ext_resource type="Texture2D" uid="uid://cney52inyl2fi" path="res://Images/Mobile RPG Mockup.png" id="1_topa1"]
+[ext_resource type="PackedScene" uid="uid://coe3r57n37gip" path="res://rat.tscn" id="2_cd24o"]
 [ext_resource type="Script" path="res://player-stats.gd" id="2_tf8kt"]
-[ext_resource type="PackedScene" uid="uid://cof74u7vkdslc" path="res://enemy.tscn" id="4_ufn8p"]
+[ext_resource type="PackedScene" uid="uid://b3br730oaf3ye" path="res://slime.tscn" id="5_o7myl"]
 [ext_resource type="Script" path="res://stats-panel.gd" id="6_ut2h2"]
 [ext_resource type="PackedScene" uid="uid://c56ttwkhebwy" path="res://sword_button.tscn" id="7_nbjhs"]
 [ext_resource type="PackedScene" uid="uid://dkjytnp8xjsde" path="res://heal_button.tscn" id="8_ahqgi"]
 
 [node name="Battle" type="Node"]
 script = ExtResource("1_lgd4f")
+enemies = Array[PackedScene]([ExtResource("2_cd24o"), ExtResource("5_o7myl")])
 
 [node name="PlayerStats" type="Node" parent="."]
 script = ExtResource("2_tf8kt")
@@ -25,8 +27,10 @@ modulate = Color(1, 1, 1, 0.129412)
 position = Vector2(45, 80)
 texture = ExtResource("1_topa1")
 
-[node name="Enemy" parent="." instance=ExtResource("4_ufn8p")]
-position = Vector2(45, 32)
+[node name="EnemyPosition" type="Marker2D" parent="."]
+position = Vector2(45, 29)
+
+[node name="Slime" parent="EnemyPosition" instance=ExtResource("5_o7myl")]
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -35,6 +39,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UI"]
+layout_mode = 0
+offset_right = 90.0
+offset_bottom = 51.0
+
+[node name="NextRoomButton" type="Button" parent="UI/CenterContainer"]
+visible = false
+layout_mode = 2
+text = "next room"
 
 [node name="StatsPanel" type="Panel" parent="UI"]
 layout_mode = 0
@@ -106,5 +120,4 @@ layout_mode = 2
 [connection signal="end_turn" from="PlayerStats" to="." method="_on_player_stats_end_turn"]
 [connection signal="hp_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_player_stats_hp_changed"]
 [connection signal="mp_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_player_stats_mp_changed"]
-[connection signal="dead" from="Enemy" to="." method="_on_enemy_dead"]
-[connection signal="end_turn" from="Enemy" to="." method="_on_enemy_end_turn"]
+[connection signal="pressed" from="UI/CenterContainer/NextRoomButton" to="." method="_on_next_room_button_pressed"]
